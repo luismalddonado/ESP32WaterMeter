@@ -24,9 +24,10 @@ Define a virtual sensor (type Counter Incremental). In order to count Liters, Co
 
 ## Running the programs
 
-Once flashed and with the ESP32 module running finish the configuration in http://ESP32IP
+Once flashed and with the ESP32 module connected to your Wifi finish the configuration in http://ESP32IP
 
 1. Change Device ID with the ID of your Domoticz virtual sensor 
-2. Change Domoticz User, Pâssword and Server
+2. Change Domoticz User, Password and Server
+
 
 
