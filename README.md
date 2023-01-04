@@ -29,7 +29,7 @@ Once flashed and with the ESP32 module connected to your Wifi finish the configu
 1. Change Device ID with the ID of your Domoticz virtual sensor 
 2. Change Domoticz User, Password and Server
 
-Unfortunatly if the ESP32 device is rebooted all this configuration is lost. I recommend to do this configuration changes in source code before flashsing!
+Unfortunatly if the ESP32 device is rebooted all this configuration is lost. I recommend to do this configuration changes in source code before flashing!
 
 
 
