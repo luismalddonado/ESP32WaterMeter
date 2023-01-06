@@ -29,7 +29,8 @@ Once flashed and started, the program:
 
 1. Connects to your Wifi
 2. Connects to Domoticz server
-3. Counts proximity sender changes every 0.5 segs and updates Domoticz every minute, if changes in proximity sender reads.
+3. Counts proximity sensor changes every 0.5 segs and updates Domoticz every minute, if changes in proximity sender reads.
+4. LED values: RED if no connectivity to Domoticz or Wifi. BLUE if connected to Domoticz and proximity sensor is active. GREEN if connected to Domoticz and proximity sensor not active
 
 
 
