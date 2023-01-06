@@ -29,7 +29,7 @@ Once flashed and started, the program:
 
 1. Connects to your Wifi
 2. Connects to Domoticz server
-3. Reads Proximity Sender values every 0.5 segs and updates Domoticz every minute
+3. Counts proximity sender changes every 0.5 segs and updates Domoticz every minute, if changes in proximity sender reads.
 
 
 
