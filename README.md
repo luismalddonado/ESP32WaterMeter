@@ -18,18 +18,18 @@ ESP32 project that integrates with Domoticz a Water Flow Meter Using a proximity
 
 Define a virtual sensor (type Counter Incremental). In order to count Liters, Counter Divider needs to be changed to 1000. Virtual Device IDX must match variable DeviceID in the ESP32 program.
 
-## Configuration
+## Configuration - Before Flashing
 
-1. Before flashing, variables ssid and password must be changed so that ESP32 module can connect to your wifi.
+1. Change variables ssid and password so that ESP32 module can connect to your Wifi.
+2. Change variables domoticzDevice, domoticzuser, domoticzpass and domoticzserver  so that ESP32 module can connect to your Domoticz Server.
 
 ## Running the programs
 
-Once flashed and with the ESP32 module connected to your Wifi finish the configuration in http://yourESP32IP
+Once flashed and started, the program:
 
-1. Change Device ID with the ID of your Domoticz virtual sensor 
-2. Change Domoticz User, Password and Server
-
-Unfortunatly if the ESP32 device is rebooted all this configuration is lost. I recommend to do this configuration changes in source code before flashing!
+1. Connects to your Wifi
+2. Connects to Domoticz server
+3. Reads Proximity Sender values every 0.5 segs and updates Domoticz every minute
 
 
 
