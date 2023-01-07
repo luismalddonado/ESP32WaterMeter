@@ -14,7 +14,7 @@ const char* ssid = "DOMOTICACASA";
 const char* password = "33333333";
 
 /* Domoticz configuration*/
-int domoticzDevice = 1767;
+int domoticzDevice = 1809;
 const char*  domoticzuser="lgarrido";
 const char*  domoticzpass="5523434a";
 const char*  domoticzserver="http://192.168.2.16:8080";
@@ -26,7 +26,7 @@ const int   daylightOffset_sec = 3600;
 int sleepdelay = 500;
 int longsleepdelay = 25000;
 
-const int MAX_VALUE= 15;
+const int MAX_VALUE= 25;
 
 time_t currenttime;
 struct tm *now_tm;
@@ -279,6 +279,30 @@ int updateDomoticzSensor(int value )
 }
 
 
+int updateDomoticzLogs(char*  message )
+{
+  char domoticzcommand[150];
+  domoticzcommand[0]='\0';
+
+  /* sensor update in domoticz*/
+
+
+  strcat(domoticzcommand,domoticzserver);
+  strcat(domoticzcommand,"/json.htm?type=command&param=addlogmessage&message=WaterMeterLiterMessage:");
+  strcat(domoticzcommand,message);
+  strcat(domoticzcommand,"&level=2");
+
+    //Serial.printf("Domoticz Server Executing command: %s\n", domoticzcommand);
+  httpClient.begin(domoticzcommand);
+  httpClient.setAuthorization(domoticzuser, domoticzpass);
+
+  int statusCode = httpClient.GET();
+
+  httpClient.end();
+
+  return statusCode;
+}
+
 
 void loop()
 {
@@ -311,20 +335,19 @@ void loop()
 
   if (currentminute!=previousminute)
   {
-    /* Protection to avoid wrong value if sensor get crazy*/
+    /* Protection to avoid wrong value if sensor gets crazy*/
     if (literslastminute>MAX_VALUE)
     {
-      Serial.println("No values will be uploaded!");
+      updateDomoticzLogs("Sensorcrazy!Novaluesadded.");
+      Serial.println("Sensorcrazy! No values will be uploaded!");
       literslasthour=literslasthour-literslastminute;
       literslastday=literslastday-literslastminute;
       literslastminute=0;
 
     }
-    if (literslastminute>0)
-    {
-      
-      updateDomoticzSensor(literslastminute);
-    }
+
+    updateDomoticzSensor(literslastminute);
+    
     if (currenthour!=previoushour)
     {
       /* one HTTP GET to domoticz every hour at least*/
