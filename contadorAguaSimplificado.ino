@@ -26,6 +26,8 @@ const int   daylightOffset_sec = 3600;
 int sleepdelay = 500;
 int longsleepdelay = 25000;
 
+const int MAX_VALUE= 15;
+
 time_t currenttime;
 struct tm *now_tm;
 int currentminute;
@@ -309,8 +311,18 @@ void loop()
 
   if (currentminute!=previousminute)
   {
+    /* Protection to avoid wrong value if sensor get crazy*/
+    if (literslastminute>MAX_VALUE)
+    {
+      Serial.println("No values will be uploaded!");
+      literslasthour=literslasthour-literslastminute;
+      literslastday=literslastday-literslastminute;
+      literslastminute=0;
+
+    }
     if (literslastminute>0)
     {
+      
       updateDomoticzSensor(literslastminute);
     }
     if (currenthour!=previoushour)
