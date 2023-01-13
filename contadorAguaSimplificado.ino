@@ -26,7 +26,7 @@ const int   daylightOffset_sec = 3600;
 int sleepdelay = 500;
 int longsleepdelay = 25000;
 
-const int MAX_VALUE= 25;
+const int MAX_VALUE= 20;
 
 time_t currenttime;
 struct tm *now_tm;
@@ -310,22 +310,23 @@ void loop()
 
   int sensorValue = analogRead(PIN_TO_SENSOR); 
 
-  currenttime = time(NULL);
-  now_tm = localtime(&currenttime);
 
-  currentminute = now_tm->tm_min;
-  currenthour = now_tm->tm_hour;
-  currentday = now_tm->tm_mday;
-
-  if(sensorValue < 10)
+  if(sensorValue == 0)
   { 
     currentStatus=1;
   }  
   else
   {
     currentStatus=0;
-  } 
+  }
 
+  currenttime = time(NULL);
+  now_tm = localtime(&currenttime);
+
+  currentminute = now_tm->tm_min;
+  currenthour = now_tm->tm_hour;
+  currentday = now_tm->tm_mday;
+  
   if ((currentStatus!=previousStatus) && (currentStatus==1) )
   {
     literslastminute=literslastminute+1;
